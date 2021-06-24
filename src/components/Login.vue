@@ -2,7 +2,7 @@
     <v-form>
     <v-container>
       <div 
-        class="text-h5 d-flex align-center justify-center pa-6 mx-auto"
+        class="text-h5 d-flex align-center justify-center pa-10 mx-auto"
         max-width="550"
         min-height="76"
         outlined
