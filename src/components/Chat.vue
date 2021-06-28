@@ -1,5 +1,10 @@
+<style scoped>
+.selected {
+  border: 2px dashed orange;
+}
+</style>
+
 <template>
-    <v-container>
     <v-navigation-drawer permanent>
       <v-list-item>
         <v-list-item-content>
@@ -21,12 +26,11 @@
         <v-list-item
           v-for="item in items"
           :key="item.title"
-          link
+          :to="item.link"
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
-
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
@@ -35,10 +39,6 @@
       <v-divider></v-divider>
 
     </v-navigation-drawer>
-        <v-app-bar app>
-            ほげほげ
-        </v-app-bar>
-    </v-container>
 </template>
 
 <script>
@@ -46,9 +46,9 @@
     data () {
       return {
         items: [
-          { title: 'とーく１', icon: '' },
-          { title: 'とーく２', icon: '' },
-          { title: 'トーク３', icon: '' },
+          { title: 'とーく１', icon: '', link: '/1' },
+          { title: 'とーく２', icon: '', link: '/2' },
+          { title: 'トーク３', icon: '', link: '/3' },
         ],
         right: null,
       }
