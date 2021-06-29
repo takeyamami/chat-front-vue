@@ -1,8 +1,3 @@
-<style scoped>
-.selected {
-  border: 2px dashed orange;
-}
-</style>
 
 <template>
     <v-navigation-drawer permanent>
