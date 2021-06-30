@@ -42,7 +42,7 @@
     data () {
       return {
         showPassword: false,
-        password: 'Password',
+        password: '',
         rules: {
           required: value => !!value || 'Required.',
           min: v => v.length >= 6 || 'Min 6 characters',
