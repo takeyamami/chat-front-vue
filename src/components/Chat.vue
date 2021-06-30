@@ -41,9 +41,9 @@
     data () {
       return {
         items: [
-          { title: 'とーく１', icon: '', link: '/1' },
-          { title: 'とーく２', icon: '', link: '/2' },
-          { title: 'トーク３', icon: '', link: '/3' },
+          { title: 'とーく１', icon: '', link: '/chat/1' },
+          { title: 'とーく２', icon: '', link: '/chat/2' },
+          { title: 'トーク３', icon: '', link: '/chat/3' },
         ],
         right: null,
       }
