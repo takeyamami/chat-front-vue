@@ -11,7 +11,7 @@ Vue.use(VueRouter)
 
 const routes = [
   { path: '/',  component: Chat },
-  { path: '/:id',  component: Chat },
+  { path: '/chat/:id',  component: Chat },
   { path: '/login', component: Login }
 ]
 
