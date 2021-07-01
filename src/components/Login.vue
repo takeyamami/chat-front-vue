@@ -31,6 +31,7 @@
         raised
         large
         rounded
+        to="/"
         >ログイン</v-btn>
       </v-card-actions>
     </v-form>
