@@ -1,41 +1,45 @@
 <template>
-  <v-card width="400px" class="mx-auto mt-5">
-    <v-card-title>
-      <h1 class="display-1">ログイン</h1>
-    </v-card-title>
-    <v-form>
-      <v-card-text>
-        <v-text-field
-        v-model="email"
-        :rules="[rules.required, rules.email]"
-        label="メールアドレス"
-        prepend-icon="mdi-account-circle"
-        ></v-text-field>
-        <v-text-field
-        v-model="password"
-        :rules="[rules.required, rules.min]"
-        :type="showPassword ? 'text' : 'password'"
-        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-        name="input-10-1"
-        label="パスワード"
-        hint="At least 6 characters"
-        counter
-        @click:append="showPassword = !showPassword"
-        prepend-icon="mdi-lock"
-        ></v-text-field>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn
-        color="primary"
-        elevation="4"
-        raised
-        large
-        rounded
-        to="/"
-        >ログイン</v-btn>
-      </v-card-actions>
-    </v-form>
-  </v-card>
+  <div>
+    <v-main>
+      <v-card width="400px" class="mx-auto mt-5">
+        <v-card-title>
+          <h1 class="display-1">ログイン</h1>
+        </v-card-title>
+        <v-form>
+          <v-card-text>
+            <v-text-field
+            v-model="email"
+            :rules="[rules.required, rules.email]"
+            label="メールアドレス"
+            prepend-icon="mdi-account-circle"
+            ></v-text-field>
+            <v-text-field
+            v-model="password"
+            :rules="[rules.required, rules.min]"
+            :type="showPassword ? 'text' : 'password'"
+            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            name="input-10-1"
+            label="パスワード"
+            hint="At least 6 characters"
+            counter
+            @click:append="showPassword = !showPassword"
+            prepend-icon="mdi-lock"
+            ></v-text-field>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+            color="primary"
+            elevation="4"
+            raised
+            large
+            rounded
+            to="/"
+            >ログイン</v-btn>
+          </v-card-actions>
+        </v-form>
+      </v-card>
+    </v-main>
+    </div>
 </template>
 
 <script>
