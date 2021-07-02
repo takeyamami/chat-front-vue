@@ -1,6 +1,8 @@
 
 <template>
-    <v-navigation-drawer permanent>
+  <div>
+    <v-navigation-drawer permanent
+        fixed>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h6">
@@ -34,6 +36,14 @@
       <v-divider></v-divider>
 
     </v-navigation-drawer>
+    <v-main>
+      <div style="margin-left:300px">
+      <v-container>
+        <div>あああ</div>
+      </v-container>
+      </div>
+    </v-main>
+  </div>
 </template>
 
 <script>
