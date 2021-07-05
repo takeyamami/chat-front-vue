@@ -1,3 +1,5 @@
+<style>
+</style>
 
 <template>
   <div>
@@ -39,7 +41,16 @@
     <v-main>
       <div style="margin-left:300px">
       <v-container>
-        <div>あああ</div>
+        <v-card
+          v-for="talk in talks"
+          :key="talk.tid"
+        >
+          <div class="talk">
+              <div class="message">
+                  <p>{{talk.message}}</p>
+              </div>
+          </div>
+        </v-card>
       </v-container>
       </div>
     </v-main>
@@ -49,14 +60,33 @@
 <script>
   export default {
     data () {
+      
       return {
         items: [
           { title: 'とーく１', icon: '', link: '/chat/1' },
           { title: 'とーく２', icon: '', link: '/chat/2' },
           { title: 'トーク３', icon: '', link: '/chat/3' },
         ],
-        right: null,
+        talks: null,
+        right: null
       }
     },
+    created () {
+      this.getRequest()
+    },
+
+    methods: {
+      getRequest() {
+        this.axios
+          .get('http://localhost:8080/talk/list/1')
+          .then(response => {
+            console.log(response)
+            this.talks = response.data
+          })
+          .catch((e) => {
+            alert(e);
+          });
+      }
+    }
   }
 </script>
