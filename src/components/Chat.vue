@@ -3,7 +3,7 @@
 
 <template>
   <div>
-    <v-main>
+    <v-main style="max-width:1200px">
       <v-container ml-0 pl-0>
         <v-row>
         <v-col 
@@ -49,11 +49,12 @@
             :key="talk.tid"
           >
             <v-card-text>
-              <p style="white-space:pre-wrap; word-wrap:break-word;">{{talk.message}}</p>
+              <p style="white-space:pre-wrap; word-wrap:break-word;" class="mb-0">{{talk.message}}</p>
             </v-card-text>
           </v-card>
         </v-col>
-        </v-row>
+        <input type="hidden" v-model="id">
+        </v-row>        
       </v-container>
     </v-main>
   </div>
@@ -61,6 +62,9 @@
 
 <script>
   export default {
+    props: {
+      id: String
+    },
     data () {
       
       return {
@@ -73,14 +77,14 @@
         right: null
       }
     },
-    created () {
+    beforeUpdate () {
       this.getRequest()
     },
 
     methods: {
       getRequest() {
         this.axios
-          .get('http://localhost:8080/talk/list/1')
+          .get('http://localhost:8080/talk/list/' + this.id)
           .then(response => {
             this.talks = response.data
           })

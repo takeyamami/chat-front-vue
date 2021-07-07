@@ -14,7 +14,7 @@ Vue.use(VueAxios, axios)
 
 const routes = [
   { path: '/',  component: Chat },
-  { path: '/chat/:id',  component: Chat },
+  { path: '/chat/:id(\\d)',  component: Chat, props: true },
   { path: '/login', component: Login }
 ]
 
