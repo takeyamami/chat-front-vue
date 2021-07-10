@@ -42,16 +42,19 @@
           <v-divider></v-divider>
         </v-col>
         <v-col cols="7">
-          <v-card
-            class="mt-5"
-            max-width="344"
-            v-for="talk in talks"
-            :key="talk.tid"
-          >
-            <v-card-text>
-              <p style="white-space:pre-wrap; word-wrap:break-word;" class="mb-0">{{talk.message}}</p>
-            </v-card-text>
-          </v-card>
+          <div v-for="talk in talks" :key="talk.tid">
+            <p class="subtitle mb-0">{{talk.user.name}}</p>
+            <v-card
+              max-width="344"
+            >
+              <v-card-text>
+                <p style="white-space:pre-wrap; word-wrap:break-word;" class="mb-0">{{talk.message}}</p>
+              </v-card-text>
+            </v-card>
+            <div style="max-width:334px">
+              <p class="caption text-right">{{ moment(talk.created_at) }}</p>
+            </div>
+          </div>
         </v-col>
         <input type="hidden" v-model="id">
         </v-row>        
@@ -61,6 +64,8 @@
 </template>
 
 <script>
+  import moment from "moment";
+
   export default {
     props: {
       id: String
@@ -72,6 +77,11 @@
           { title: 'とーく１', icon: '', link: '/chat/1' },
           { title: 'とーく２', icon: '', link: '/chat/2' },
           { title: 'トーク３', icon: '', link: '/chat/3' },
+          { title: 'トーク4', icon: '', link: '/chat/4' },
+          { title: 'トーク5', icon: '', link: '/chat/5' },
+          { title: 'トーク6', icon: '', link: '/chat/6' },
+          { title: 'トーク7', icon: '', link: '/chat/7' },
+          { title: 'トーク8', icon: '', link: '/chat/8' },
         ],
         talks: null,
         right: null
@@ -91,7 +101,12 @@
           .catch((e) => {
             alert(e);
           });
+      },
+      
+      moment(date) {
+          return moment(date).format('YYYY/MM/DD HH:mm');
       }
-    }
+    },
+
   }
 </script>
