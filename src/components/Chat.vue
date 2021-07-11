@@ -56,8 +56,20 @@
             </div>
           </div>
         </v-col>
-        <input type="hidden" v-model="id">
-        </v-row>        
+        </v-row>
+          <div id="form" class="">        
+          <v-textarea
+            name="message"
+            solo
+            label="メッセージを入力してください"
+            value=""
+            no-resize
+            rows="3"
+            append-outer-icon="mdi-comment"
+          ></v-textarea>
+          <input type="hidden" name="rid" v-model="id">
+          <input type="hidden" name="uid" value="1">
+        </div>    
       </v-container>
     </v-main>
   </div>
@@ -84,7 +96,7 @@
           { title: 'トーク8', icon: '', link: '/chat/8' },
         ],
         talks: null,
-        right: null
+        right: null,
       }
     },
     beforeUpdate () {
