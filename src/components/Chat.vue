@@ -5,9 +5,9 @@
   <div>
     <v-main style="max-width:1200px">
       <v-container ml-0 pl-0>
-        <v-row>
+        <v-row style="min-height: 1000px">
         <v-col 
-          cols="3"
+          cols="4"
         >
           <v-list-item>
             <v-list-item-content>
@@ -41,7 +41,7 @@
           </v-list>
           <v-divider></v-divider>
         </v-col>
-        <v-col cols="7">
+        <v-col cols="8">
           <div v-for="talk in talks" :key="talk.tid">
             <p class="subtitle mb-0">{{talk.user.name}}</p>
             <v-card
@@ -55,21 +55,25 @@
               <p class="caption text-right">{{ moment(talk.created_at) }}</p>
             </div>
           </div>
+          <div id="form" style="position:fixed; bottom: 0; min-width:500px;">
+            <v-layout wrap>
+            <v-textarea
+              name="message"
+              solo
+              
+              label="メッセージを入力してください"
+              value=""
+              no-resize
+              rows="3"
+            >
+            </v-textarea>
+            <v-btn fab dark color="cyan" class="mx-2 my-5 submit"><v-icon dark>mdi-pencil</v-icon></v-btn>
+            <input type="hidden" name="rid" v-model="id">
+            <input type="hidden" name="uid" value="1">
+            </v-layout>
+          </div>
         </v-col>
         </v-row>
-          <div id="form" class="">        
-          <v-textarea
-            name="message"
-            solo
-            label="メッセージを入力してください"
-            value=""
-            no-resize
-            rows="3"
-            append-outer-icon="mdi-comment"
-          ></v-textarea>
-          <input type="hidden" name="rid" v-model="id">
-          <input type="hidden" name="uid" value="1">
-        </div>    
       </v-container>
     </v-main>
   </div>
