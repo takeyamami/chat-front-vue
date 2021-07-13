@@ -3,19 +3,19 @@
 
 <template>
   <div>
-    <v-main style="max-width:1200px">
+    <v-main style="max-width:1400px">
       <v-container ml-0 pl-0>
-        <v-row style="min-height: 1000px">
+        <v-row style="padding-bottom: 100px;">
         <v-col 
           cols="4"
         >
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title class="text-h6">
-                なまえなまえ
+                {{ user.name }}
               </v-list-item-title>
               <v-list-item-subtitle>
-                xxxx@gmail.com
+                <a href="/login">ログアウト</a>
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -43,24 +43,40 @@
         </v-col>
         <v-col cols="8">
           <div v-for="talk in talks" :key="talk.tid">
-            <p class="subtitle mb-0">{{talk.user.name}}</p>
-            <v-card
-              max-width="344"
-            >
-              <v-card-text>
-                <p style="white-space:pre-wrap; word-wrap:break-word;" class="mb-0">{{talk.message}}</p>
-              </v-card-text>
-            </v-card>
-            <div style="max-width:334px">
-              <p class="caption text-right">{{ moment(talk.created_at) }}</p>
+            <div v-if="user.uid == talk.user.uid" style="padding-left:30%">
+              <p class="subtitle mb-0">{{talk.user.name}}</p>
+              <v-card
+                max-width="400"
+                dark
+                color="#41b0ff"
+              >
+                <v-card-text>
+                  <p style="white-space:pre-wrap; word-wrap:break-word;" class="mb-0 white--text">{{talk.message}}</p>
+                </v-card-text>
+              </v-card>
+              <div style="max-width:400px">
+                <p class="caption text-right">{{ moment(talk.created_at) }}</p>
+              </div>
+            </div>
+            <div v-else>
+              <p class="subtitle mb-0">{{talk.user.name}}</p>
+              <v-card
+                max-width="400"
+              >
+                <v-card-text>
+                  <p style="white-space:pre-wrap; word-wrap:break-word;" class="mb-0">{{talk.message}}</p>
+                </v-card-text>
+              </v-card>
+              <div style="max-width:400px">
+                <p class="caption text-right">{{ moment(talk.created_at) }}</p>
+              </div>
             </div>
           </div>
-          <div id="form" style="position:fixed; bottom: 0; min-width:500px;">
+          <div id="form" style="position:fixed; bottom: 0; min-width:600px;">
             <v-layout wrap>
             <v-textarea
               name="message"
               solo
-              
               label="メッセージを入力してください"
               value=""
               no-resize
@@ -101,7 +117,11 @@
         ],
         talks: null,
         right: null,
+        user: null,
       }
+    },
+    created() {
+      this.auth()
     },
     beforeUpdate () {
       this.getRequest()
@@ -115,10 +135,14 @@
             this.talks = response.data
           })
           .catch((e) => {
-            alert(e);
+            alert(e)
           });
       },
-      
+
+      auth() {
+        this.user = {uid: 1, name: "yamamomi"}
+      },
+       
       moment(date) {
           return moment(date).format('YYYY/MM/DD HH:mm');
       }
