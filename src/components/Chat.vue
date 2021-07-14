@@ -118,21 +118,34 @@
         talks: null,
         right: null,
         user: null,
+        rooms: null,
       }
     },
     created() {
       this.auth()
+      this.getRoomRequest(this.user.uid)
     },
     beforeUpdate () {
-      this.getRequest()
+      this.getTalkRequest()
     },
 
     methods: {
-      getRequest() {
+      getTalkRequest() {
         this.axios
           .get('http://localhost:8080/talk/list/' + this.id)
           .then(response => {
             this.talks = response.data
+          })
+          .catch((e) => {
+            alert(e)
+          });
+      },
+
+      getRoomRequest(uid) {
+        this.axios
+          .get('http://localhost:8080/room/list/' + uid)
+          .then(response => {
+            this.rooms = response.data
           })
           .catch((e) => {
             alert(e)
