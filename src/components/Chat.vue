@@ -27,15 +27,12 @@
             nav
           >
             <v-list-item
-              v-for="item in items"
-              :key="item.title"
-              :to="item.link"
+              v-for="room in rooms"
+              :key="room.rid"
+              :to= "baseUrl + room.rid"
             >
-              <v-list-item-icon>
-                <v-icon>{{ item.icon }}</v-icon>
-              </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
+                <v-list-item-title>{{ room.name }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -105,20 +102,11 @@
     data () {
       
       return {
-        items: [
-          { title: 'とーく１', icon: '', link: '/chat/1' },
-          { title: 'とーく２', icon: '', link: '/chat/2' },
-          { title: 'トーク３', icon: '', link: '/chat/3' },
-          { title: 'トーク4', icon: '', link: '/chat/4' },
-          { title: 'トーク5', icon: '', link: '/chat/5' },
-          { title: 'トーク6', icon: '', link: '/chat/6' },
-          { title: 'トーク7', icon: '', link: '/chat/7' },
-          { title: 'トーク8', icon: '', link: '/chat/8' },
-        ],
         talks: null,
         right: null,
         user: null,
         rooms: null,
+        baseUrl: "/chat/",
       }
     },
     created() {
