@@ -4,10 +4,11 @@
 <template>
   <div>
     <v-main style="max-width:1400px">
-      <v-container ml-0 pl-0>
-        <v-row style="padding-bottom: 100px;">
+      <v-container ml-0 pl-0 fluid>
+        <v-row>
         <v-col 
           cols="4"
+          style="position: relative;"
         >
           <v-list-item>
             <v-list-item-content>
@@ -38,7 +39,10 @@
           </v-list>
           <v-divider></v-divider>
         </v-col>
-        <v-col cols="8">
+        <v-col 
+          cols="8"
+          style="overflow-y: auto; position: relative; padding-bottom: 200px;"
+        >
           <div v-for="talk in talks" :key="talk.tid">
             <div v-if="user.uid == talk.user.uid" style="padding-left:30%">
               <p class="subtitle mb-0">{{talk.user.name}}</p>
@@ -119,6 +123,10 @@
 
     methods: {
       getTalkRequest() {
+        if( typeof this.id === 'undefined') {
+          return;
+        }
+
         this.axios
           .get('http://localhost:8080/talk/list/' + this.id)
           .then(response => {
