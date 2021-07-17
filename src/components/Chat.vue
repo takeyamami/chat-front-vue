@@ -31,6 +31,7 @@
               v-for="room in rooms"
               :key="room.rid"
               :to= "baseUrl + room.rid"
+              @click="clickEvent()"
             >
               <v-list-item-content>
                 <v-list-item-title>{{ room.name }}</v-list-item-title>
@@ -74,20 +75,27 @@
             </div>
           </div>
           <div id="form" style="position:fixed; bottom: 0; min-width:600px;">
-            <v-layout wrap>
-            <v-textarea
-              name="message"
-              solo
-              label="メッセージを入力してください"
-              value=""
-              no-resize
-              rows="3"
-            >
-            </v-textarea>
-            <v-btn fab dark color="cyan" class="mx-2 my-5 submit"><v-icon dark>mdi-pencil</v-icon></v-btn>
-            <input type="hidden" name="rid" v-model="id">
-            <input type="hidden" name="uid" value="1">
-            </v-layout>
+            <form>
+              <v-layout wrap>
+                <v-textarea
+                  v-model="message"
+                  solo
+                  label="メッセージを入力してください"
+                  value=""
+                  no-resize
+                  rows="3"
+                  required
+                >
+                </v-textarea>
+                <v-btn 
+                  fab 
+                  dark 
+                  color="cyan" 
+                  class="mx-2 my-5"
+                  @click="submit"
+                  ><v-icon dark>mdi-pencil</v-icon></v-btn>
+              </v-layout>
+            </form>
           </div>
         </v-col>
         </v-row>
@@ -107,34 +115,33 @@
       
       return {
         talks: null,
-        right: null,
         user: null,
         rooms: null,
         baseUrl: "/chat/",
+        message: '',
+        lastId: '',
       }
     },
     created() {
       this.auth()
       this.getRoomRequest(this.user.uid)
-    },
-    beforeUpdate () {
       this.getTalkRequest()
     },
 
     methods: {
       getTalkRequest() {
-        if( typeof this.id === 'undefined') {
-          return;
+        if( typeof this.id != 'undefined') {
+        
+          this.axios
+            .get('http://localhost:8080/talk/list/' + this.id)
+            .then(response => {
+              this.talks = response.data
+            })
+            .catch((e) => {
+              alert(e)
+            });
         }
 
-        this.axios
-          .get('http://localhost:8080/talk/list/' + this.id)
-          .then(response => {
-            this.talks = response.data
-          })
-          .catch((e) => {
-            alert(e)
-          });
       },
 
       getRoomRequest(uid) {
@@ -154,7 +161,34 @@
        
       moment(date) {
           return moment(date).format('YYYY/MM/DD HH:mm');
-      }
+      },
+
+      submit() {
+        if ( this.message == "") {
+          return;
+        }
+
+        let talk = {
+          "rid" : this.id,
+          "message" : this.message,
+          "user" : this.user,
+        }
+
+        this.axios
+          .post('http://localhost:8080/talk/create', talk)
+          .then(response => {
+            console.log('response body:', response.data)
+            this.getTalkRequest()
+          })
+          .catch((e) => {
+            alert(e)
+          });
+
+      },
+
+      clickEvent() {
+        this.getTalkRequest()
+      },
     },
 
   }
