@@ -172,8 +172,8 @@
 
         let talk = {
           "rid" : this.id,
+          "uid" : this.user.uid,
           "message" : this.message,
-          "user" : this.user,
         }
 
         this.axios
@@ -181,6 +181,7 @@
           .then(response => {
             console.log('response body:', response.data)
             this.getTalkRequest()
+            this.message = ""
           })
           .catch((e) => {
             alert(e)
