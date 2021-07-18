@@ -74,7 +74,7 @@
               </div>
             </div>
           </div>
-          <div id="form" style="position:fixed; bottom: 0; min-width:600px;">
+          <div id="form" style="position:fixed; bottom: 0; min-width:600px;" v-show="show">
             <form>
               <v-layout wrap>
                 <v-textarea
@@ -120,11 +120,13 @@
         baseUrl: "/chat/",
         message: '',
         lastId: '',
+        show: true,
       }
     },
     created() {
       this.auth()
       this.getRoomRequest(this.user.uid)
+      this.show = typeof this.id != 'undefined'
       this.getTalkRequest()
     },
 
@@ -187,6 +189,7 @@
       },
 
       clickEvent() {
+        this.show = typeof this.id != 'undefined'
         this.getTalkRequest()
       },
     },
